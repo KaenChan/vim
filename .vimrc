@@ -1,7 +1,6 @@
 set sw=4
 set ts=4
 set et
-set smarttab
 set smartindent
 set lbr
 set fo+=mB
@@ -9,7 +8,6 @@ set sm
 set selection=inclusive
 set wildmenu
 set mousemodel=popup
-
 au FileType php setlocal dict+=~/.vim/dict/php_funclist.dict
 au FileType css setlocal dict+=~/.vim/dict/css.dict
 au FileType c setlocal dict+=~/.vim/dict/c.dict
@@ -18,7 +16,6 @@ au FileType scale setlocal dict+=~/.vim/dict/scale.dict
 au FileType javascript setlocal dict+=~/.vim/dict/javascript.dict
 au FileType html setlocal dict+=~/.vim/dict/javascript.dict
 au FileType html setlocal dict+=~/.vim/dict/css.dict
-
 "
 "syntastic相关
 execute pathogen#infect()
@@ -33,13 +30,22 @@ set rtp+=$GOROOT/misc/vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax on
 set cul "高亮光标所在行
-set cuc
+"set cuc
 set shortmess=atI   " 启动的时候不显示那个援助乌干达儿童的提示  
 set go=             " 不要图形按钮  
 "color desert     " 设置背景主题  
-color ron     " 设置背景主题  
+"color ron     " 设置背景主题  
 "color torte     " 设置背景主题  
+"color molokai
+set background=dark
+colorscheme solarized
 "set guifont=Courier_New:h10:cANSI   " 设置字体  
+" set guifont=Consolas\ 12
+" set guifont=Bitstream_Vera_Sans_Mono\ 10.5
+" set guifontwide=Yahei_Mono\ 10.5
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 11
+set guifontwide=Yahei\ Mono\ 10.5
+
 "autocmd InsertLeave * se nocul  " 用浅色高亮当前行  
 autocmd InsertEnter * se cul    " 用浅色高亮当前行  
 set ruler           " 显示标尺  
@@ -53,7 +59,7 @@ set laststatus=2    " 启动显示状态行(1),总是显示状态行(2)
 set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
 " 显示中文帮助
 if version >= 603
-	set helplang=cn
+    set helplang=cn
 	set encoding=utf-8
 endif
 " 自动缩进
@@ -79,7 +85,7 @@ set incsearch
 set langmenu=zh_CN.UTF-8
 set helplang=cn
 " 总是显示状态行
-set cmdheight=2
+"set cmdheight=2
 " 侦测文件类型
 filetype on
 " 载入文件类型插件
@@ -91,22 +97,17 @@ set viminfo+=!
 " 带有如下符号的单词不要被换行分割
 set iskeyword+=_,$,@,%,#,-
 " 字符间插入的像素行数目
-
 "markdown配置
 au BufRead,BufNewFile *.{md,mdown,mkd,mkdn,markdown,mdwn}   set filetype=mkd
 au BufRead,BufNewFile *.{go}   set filetype=go
 au BufRead,BufNewFile *.{js}   set filetype=javascript
 "rkdown to HTML  
-nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
-nmap fi :!firefox %.html & <CR><CR>
-nmap \ \cc
-vmap \ \cc
-
+"nmap md :!~/.vim/markdown.pl % > %.html <CR><CR>
+"nmap fi :!firefox %.html & <CR><CR>
+"nmap \ \cc
+"vmap \ \cc
 "将tab替换为空格
 nmap tt :%s/\t/    /g<CR>
-
-
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """""新文件标题
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -122,12 +123,10 @@ func SetTitle()
         call setline(1,"#!/usr/bin/env python")
         call append(line("."),"# coding=utf-8")
 	    call append(line(".")+1, "") 
-
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
         call append(line("."),"# encoding: utf-8")
 	    call append(line(".")+1, "")
-
 "    elseif &filetype == 'mkd'
 "        call setline(1,"<head><meta charset=\"UTF-8\"></head>")
 	else 
@@ -160,34 +159,32 @@ func SetTitle()
 	"新建文件后，自动定位到文件末尾
 endfunc 
 autocmd BufNewFile * normal G
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :nmap <silent> <F9> <ESC>:Tlist<RETURN>
 " shift tab pages
-map <S-Left> :tabp<CR>
-map <S-Right> :tabn<CR>
-map! <C-Z> <Esc>zzi
-map! <C-O> <C-Y>,
-map <C-A> ggVG$"+y
-map <Esc><Esc> :w<CR>
-map <F12> gg=G
-map <C-w> <C-w>w
-imap <C-k> <C-y>,
-imap <C-t> <C-q><TAB>
-imap <C-j> <ESC>
-" 选中状态下 Ctrl+c 复制
-"map <C-v> "*pa
-imap <C-v> <Esc>"*pa
-imap <C-a> <Esc>^
-imap <C-e> <Esc>$
-vmap <C-c> "+y
-set mouse=v
+"map <S-Left> :tabp<CR>
+"map <S-Right> :tabn<CR>
+"map! <C-Z> <Esc>zzi
+"map! <C-O> <C-Y>,
+"map <C-A> ggVG$"+y
+"map <Esc><Esc> :w<CR>
+"map <F12> gg=G
+""map <C-w> <C-w>w
+"imap <C-k> <C-y>,
+"imap <C-t> <C-q><TAB>
+"imap <C-j> <ESC>
+"" 选中状态下 Ctrl+c 复制
+""map <C-v> "*pa
+"imap <C-v> <Esc>"*pa
+"imap <C-a> <Esc>^
+"imap <C-e> <Esc>$
+"vmap <C-c> "+y
+"set mouse=v
 "set clipboard=unnamed
 "去空行  
-nnoremap <F2> :g/^\s*$/d<CR> 
+"nnoremap <F2> :g/^\s*$/d<CR> 
 "比较文件  
 nnoremap <C-F2> :vert diffsplit 
 "nnoremap <Leader>fu :CtrlPFunky<Cr>
@@ -232,12 +229,8 @@ func! Rungdb()
 	exec "!g++ % -std=c++11 -g -o %<"
 	exec "!gdb ./%<"
 endfunc
-
-
 "代码格式优化化
-
 map <F6> :call FormartSrc()<CR><CR>
-
 "定义FormartSrc()
 func FormartSrc()
     exec "w"
@@ -262,8 +255,6 @@ func FormartSrc()
     exec "e! %"
 endfunc
 "结束定义FormartSrc
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 ""实用设置
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -277,7 +268,6 @@ endif
 autocmd vimenter * if !argc() | NERDTree | endif
 " 只剩 NERDTree时自动关闭
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-
 " 设置当文件被改动时自动载入
 set autoread
 " quickfix模式
@@ -298,8 +288,6 @@ set guioptions-=m           " 隐藏菜单栏
 ""set foldcolumn=0
 ""set foldmethod=indent 
 ""set foldlevel=3 
-" 不要使用vi的键盘模式，而是vim自己的
-set nocompatible
 " 去掉输入错误的提示声音
 set noeb
 " 在处理未保存或只读文件的时候，弹出确认
@@ -308,12 +296,8 @@ set confirm
 set nobackup
 set noswapfile
 "搜索忽略大小写
-set ignorecase
-
-
-
-
-set linespace=0
+"set ignorecase
+"set linespace=0
 " 增强模式中的命令行自动完成操作
 set wildmenu
 " 使回格键（backspace）正常处理indent, eol, start等
@@ -322,7 +306,7 @@ set backspace=2
 set whichwrap+=<,>,h,l
 " 可以在buffer的任何地方使用鼠标（类似office中在工作区双击鼠标定位）
 set mouse=a
-set selection=exclusive
+"set selection=exclusive
 set selectmode=mouse,key
 " 通过使用: commands命令，告诉我们文件的哪一行被改变过
 set report=0
@@ -367,8 +351,6 @@ let Tlist_Exist_OnlyWindow = 1  " 如果只有一个buffer，kill窗口也kill�
 "设置tags  
 set tags=tags;  
 set autochdir 
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "其他东东
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -388,7 +370,6 @@ let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1  
 nmap tl :Tlist<cr>
-
 "python补全
 let g:pydiction_location = '~/.vim/after/complete-dict'
 let g:pydiction_menu_height = 20
@@ -397,25 +378,18 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapWindowNavArrows = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 let g:miniBufExplModSelTarget = 1
-
-
-set iskeyword+=.
+"set iskeyword+=.
 set termencoding=utf-8
 set encoding=utf8
 set fileencodings=utf8,ucs-bom,gbk,cp936,gb2312,gb18030
-
 autocmd FileType python set omnifunc=pythoncomplete#Complete
-
 "set nocompatible               " be iMproved
 "filetype off                   " required!
-
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
-
 " let Vundle manage Vundle
 " required! 
 Bundle 'gmarik/vundle'
-
 " My Bundles here:
 "
 " original repos on github
@@ -425,48 +399,63 @@ Bundle 'Yggdroot/indentLine'
 let g:indentLine_char = '┊'
 "ndle 'tpope/vim-rails.git'
 " vim-scripts repos
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+"Bundle 'L9'
+"Bundle 'FuzzyFinder'
 " non github repos
 Bundle 'https://github.com/wincent/command-t.git'
-Bundle 'Auto-Pairs'
-Bundle 'python-imports.vim'
+"Bundle 'Auto-Pairs'
+"Bundle 'python-imports.vim'
 Bundle 'CaptureClipboard'
 Bundle 'ctrlp-modified.vim'
 Bundle 'last_edit_marker.vim'
 Bundle 'synmark.vim'
 "Bundle 'Python-mode-klen'
-Bundle 'SQLComplete.vim'
-Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
+"Bundle 'SQLComplete.vim'
+"Bundle 'Javascript-OmniCompletion-with-YUI-and-j'
 "Bundle 'JavaScript-Indent'
 "Bundle 'Better-Javascript-Indentation'
-Bundle 'jslint.vim'
-Bundle "pangloss/vim-javascript"
+"Bundle 'jslint.vim'
+"Bundle "pangloss/vim-javascript"
 Bundle 'Vim-Script-Updater'
 Bundle 'ctrlp.vim'
 Bundle 'tacahiroy/ctrlp-funky'
-Bundle 'jsbeautify'
+"Bundle 'jsbeautify'
 Bundle 'The-NERD-Commenter'
 "django
-Bundle 'django_templates.vim'
-Bundle 'Django-Projects'
-
+"Bundle 'django_templates.vim'
+"Bundle 'Django-Projects'
 "Bundle 'FredKSchott/CoVim'
 "Bundle 'djangojump'
+
+Bundle 'majutsushi/tagbar'
+"nmap <Leader>tb :TagbarToggle<CR>      "快捷键设置
+let g:tagbar_ctags_bin='ctags'          "ctags程序的路径
+let g:tagbar_width=30                   "窗口宽度的设置
+map <F7> :Tagbar<CR>
+
+Bundle 'taglist.vim'
+
+Plugin 'flazz/vim-colorschemes'
+
+Plugin 'vim-airline/vim-airline'
+"let g:airline#extensions#tabline#enabled = 1
+"let g:airline#extensions#tabline#left_alt_sep = '|'
+
+Plugin 'vim-airline/vim-airline-themes'
+
+"autocmd BufReadPost *.cpp,*.c,*.h,*.hpp,*.cc,*.cxx call tagbar#autoopen()  "如果是c语言的程序的话，tagbar自动开启
+
 " ...
 let g:html_indent_inctags = "html,body,head,tbody"
 let g:html_indent_script1 = "inc"
 let g:html_indent_style1 = "inc"
-
 filetype plugin indent on     " required!
 "
 "ctrlp设置
 "
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip,*.pyc,*.png,*.jpg,*.gif     " MacOSX/Linux
 set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe,*.pyc,*.png,*.jpg,*.gif  " Windows
-
 let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 let g:ctrlp_custom_ignore = '\v\.(exe|so|dll)$'
 let g:ctrlp_extensions = ['funky']
-
 let NERDTreeIgnore=['\.pyc']
